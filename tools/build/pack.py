@@ -591,13 +591,13 @@ def packCordova(build_json=None, app_src=None, app_dest=None, app_name=None):
         os.chdir(orig_dir)
         return False
     os.chdir(os.path.join(BUILD_ROOT, "cordova", app_name))
-    pack_cmd = "./cordova/build"
+    pack_cmd = "./cordova/build --gradle"
     if not doCMD(pack_cmd, DEFAULT_CMD_TIMEOUT):
         os.chdir(orig_dir)
         return False
 
     if not doCopy(os.path.join(
-            BUILD_ROOT, "cordova", app_name, "bin", "%s-debug.apk" %
+            BUILD_ROOT, "cordova", app_name, "build", "outputs", "apk", "%s-debug.apk" %
             app_name),
             os.path.join(app_dest, "%s.apk" % app_name)):
         os.chdir(orig_dir)
